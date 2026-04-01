@@ -13,7 +13,7 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	 */
 	public SelectAllQuestion(String prompt, String answer, String[] choices) {
 		// Hint: 1 point per choice
-		throw new NotYetImplementedException();
+		super(prompt, answer, choices.length, choices);
 	}
 	
 	/**
@@ -21,7 +21,10 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	 * @param String givenAnswer to check for points
 	 */
 	public int checkAnswer(String givenAnswer) {
-		throw new NotYetImplementedException();
+		int totalCorrect = getAnswer().length();
+		int missing = findMissingCorrectAnswers(super.getAnswer());
+		int incorrect = findIncorrectGivenAnswers(super.getAnswer());
+		return (totalCorrect - missing - incorrect);
 	}
 
 	/**
@@ -67,6 +70,6 @@ public class SelectAllQuestion extends MultipleChoiceQuestion {
 	}	
 	
 	public static void main(String[] args) {	
-		
+		SelectAllQuestion saq = new SelectAllQuestion("What's your name?", "Johnny", new String[]{"Johnny","Luke","Jack","Joe","John"});
 	}
 }
